@@ -38,9 +38,10 @@ export default function CoinData(){
             fully_diluted_valuation: {
                 usd: ""
             },
+            price_change_percentage_24h: 0,
             circulating_supply: "",
             total_supply: "",
-            max_supply: "",
+            max_supply: 0,
         }
     });
     const [chart, setChart] = useState({prices : []});
@@ -78,7 +79,7 @@ export default function CoinData(){
         
     }, []);
 
-    const data = [];
+    const data: object[] = []; // <---
 
     chart.prices.map((val) => {
         let dataFormatted =  new Date(val[0]);
@@ -87,14 +88,14 @@ export default function CoinData(){
 
     console.log(data);
 
-    const CustomizedDot = (props) => {};
+    //const CustomizedDot = (props) => {};
 
     function getNeededTimeStap(val:number){
-        setChartTimeStrap(t => t = val)
+        setChartTimeStrap(val) // <<<<<<< ------------------- 
     }
 
-    let progressDifference = coinData.market_data.high_24h.usd - coinData.market_data.low_24h.usd;
-    let progressValue = coinData.market_data.current_price.usd - coinData.market_data.low_24h.usd;
+    let progressDifference:number = +coinData.market_data.high_24h.usd - +coinData.market_data.low_24h.usd; // <---
+    let progressValue:number = +coinData.market_data.current_price.usd - +coinData.market_data.low_24h.usd; // <---
 
     return (
         <>

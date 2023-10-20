@@ -8,20 +8,38 @@ import axios from 'axios';
 
 function App() {
 
-  const [coins, updateCoins] = useState([]);
-  const [globalData, updateGlobal] = useState({
+  const [coins, updateCoins] = useState<[]>([]);
+  
+  interface forGlobal{
     data: {
       total_market_cap: {
-        usd: ""
+          usd: number;
       },
-      active_cryptocurrencies: "",
-      markets: "",
+      active_cryptocurrencies: number,
+      markets: number,
       total_volume: {
-        usd: ""
+          usd:number
       },
       market_cap_percentage: {
-        btc: "",
-        eth: ""
+          btc:number,
+          eth: number
+      }
+    }
+  }
+  
+  const [globalData, updateGlobal] = useState<forGlobal>({
+    data: {
+      total_market_cap: {
+        usd: 0
+      },
+      active_cryptocurrencies: 0,
+      markets: 0,
+      total_volume: {
+        usd: 0
+      },
+      market_cap_percentage: {
+        btc: 0,
+        eth: 0
       }
     }
   });

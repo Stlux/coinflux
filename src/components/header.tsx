@@ -16,7 +16,7 @@ export default function Header(){
         toggle(!theme);
     }
 
-    function search(e){
+    function search(e:any){
         e.preventDefault()
         setSearchQuery(e.target.search.value)
     }
@@ -33,16 +33,30 @@ export default function Header(){
 
     console.log(searchQueryData.coins);
 
+    interface columnsTypes{
+        id: number;
+        thumb: string;
+        name: string;
+        market_cap_rank: number;
+    }
+
+    interface TableColumn<T> {
+        name: string;
+        selector: (row: T) => string | number; // Adjust this based on the type of data in your columns
+        sortable?: boolean;
+        width?: string;
+    }
+
     let urlToCoin = "/coindata/";
-    const columns = [
+    const columns:TableColumn<columnsTypes>[] = [
         {
             name: 'Coin',
-            selector: row => <a href={urlToCoin + row.id}><img src={row.thumb} alt={`${row.id}`} className='coin-image-search'></img><span className='coin-name-search'>{row.name}</span></a>,
+            selector: (row:columnsTypes) => <a href={urlToCoin + row.id}><img src={row.thumb} alt={`${row.id}`} className='coin-image-search'></img><span className='coin-name-search'>{row.name}</span></a> as unknown as string,
             width: "250px"
         },
         {
             name: 'Rank',
-            selector: row => <a href={urlToCoin + row.id}>{row.market_cap_rank}</a>
+            selector: (row:columnsTypes) => <a href={urlToCoin + row.id}>{row.market_cap_rank}</a> as unknown as string
         },
     ];
 

@@ -2,65 +2,106 @@ import DataTable from 'react-data-table-component';
 import CurrencyFormat from 'react-currency-format';
 import floorToTwoDecimals from '../components/functions';
 
-export default function Main(props:{}){
+interface forPropsMain{ // <---
+    coinsData: [],
+    globalData: {
+        data: {
+            total_market_cap: {
+                usd: number;
+            },
+            active_cryptocurrencies: number,
+            markets: number,
+            total_volume: {
+                usd:number
+            },
+            market_cap_percentage: {
+                btc:number,
+                eth: number
+            }
+        }
+    },
+}
+
+interface columnsTypes{
+    id: number;
+    thumb: string;
+    name: string;
+    market_cap_rank: number;
+    image: string;
+    symbol: string;
+    current_price: number;
+    price_change_24h: number;
+    price_change_percentage_24h: number;
+    total_volume: number;
+    market_cap: number;
+}
+
+interface TableColumn<T> {
+    name: string;
+    selector: (row: T) => string | number; // Adjust this based on the type of data in your columns
+    sortable?: boolean;
+    width?: string;
+}
+
+export default function Main(props:forPropsMain){
 
     let linkToCoin = "/coindata/";
 
-    const columns = [
-        {
-            name: '#',
-            selector: row => props.coinsData.indexOf(row)+1,
-            sortable: true,
-            width: '70px'
-        },
+    const columns_data:TableColumn<columnsTypes>[] = [
+        // {
+        //     name: '#',
+        //     selector: (row:columnsTypes) => props.coinsData.indexOf(row)+1, // <---
+        //     sortable: true,
+        //     width: '70px'
+        // },
         {
             name: 'Image',
-            selector: row => <a href={linkToCoin + row.id}><img src={row.image} alt={`${row.id}`} className='coin-image'></img></a>,
+            selector: (row:columnsTypes) => <a href={linkToCoin + row.id}><img src={row.image} alt={`${row.id}`} className='coin-image'></img></a> as unknown as string,
             width: '100px'
         },
         {
             name: 'Coin',
-            selector: row => <a href={linkToCoin + row.id}><b>{row.name}</b></a>,
+            selector: (row:columnsTypes) => <a href={linkToCoin + row.id}><b>{row.name}</b></a> as unknown as string,
         },
         {
             name: 'Ticker',
-            selector: row => row.symbol,
+            selector: (row:columnsTypes) => row.symbol,
             sortable: true,
             width: '100px'
         },
         {
             name: 'Price (USD)',
-            selector: row => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.current_price} prefix={'$'} />,
+            selector: (row:columnsTypes) => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.current_price} prefix={'$'} /> as unknown as string,
             sortable: true
         },
         {
             name: '24h',
-            selector: row => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.price_change_24h} prefix={'$'} />,
+            selector: (row:columnsTypes) => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.price_change_24h} prefix={'$'} /> as unknown as string,
             sortable: true
         },
         {
             name: '24h (%)',
-            selector: row => {
+            selector: (row:columnsTypes) => {
 
                 return row.price_change_percentage_24h >= 0 ?
                     (
-                        <span style={{color: "green"}}>{row.price_change_percentage_24h}%</span>
-                    )
+                        <span style={{color: "green"}}>{row.price_change_percentage_24h}%</span> 
+                    ) as unknown as string
                 :  
                     (
                         <span style={{color: "red"}}>{row.price_change_percentage_24h}%</span>
-                    )
+                    ) as unknown as string
             },
             sortable: true
         },
         {
             name: '24h Volume',
-            selector: row => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.total_volume} prefix={'$'} />,
+            selector: (row:columnsTypes) => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.total_volume} prefix={'$'} /> as unknown as string,
             sortable: true
         },
         {
             name: 'Mkt Cap',
-            selector: row => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.market_cap} prefix={'$'} />,
+            selector: (row:columnsTypes) => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.market_cap} prefix={'$'} /> as unknown as string,
             sortable: true
         }
     ];
@@ -101,7 +142,9 @@ export default function Main(props:{}){
 
                 <div className="top-100-info-tab">
                     <h1>Top 100 coins</h1>
-                    <div className='data-table'><DataTable columns={columns} data={data}/></div>
+                    <div className='data-table'>
+                        <DataTable columns={columns_data} data={data}/>
+                        </div>
                 </div>
 
                 <div className='information-about-crypto-section'>

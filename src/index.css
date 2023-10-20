@@ -209,6 +209,7 @@ a:hover {
   width: 100%;
   height: 25px;
   -webkit-appearance: none;
+  appearance: none;
   outline: none;
 }
 
