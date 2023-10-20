@@ -1,0 +1,555 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #5815DF;
+  text-decoration: inherit;
+}
+
+ul{
+  padding-inline-start: 0px;
+}
+
+a:hover {
+  color: #5815DF;
+}
+
+.container{
+  max-width: 1200px;
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+.global-info-tab-element{
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.global-info-tab-elements{
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 5px 2px #eee;
+  border-radius: 10px;
+}
+
+.global-info-tab-element:first-child{
+  margin-left: 0;
+}
+
+.global-info-tab-element:last-child{
+  margin-right: 0;
+}
+
+.coin-image{
+  
+  width: 30px;
+  height: 30px;
+
+  padding: 10px;
+  border-radius: 30px;
+
+  margin: 10px;
+
+  box-shadow: 0px 0px 5px 2px #eee;
+}
+
+.coin-image-search{
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 5px 2px #eee;
+}
+
+.coin-name-search{
+  position: relative;
+  top: -10px;
+  margin-left: 20px;
+}
+
+.logo{
+  width: 200px;
+}
+
+.navbar{
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 5px 2px #eee;
+  border-radius: 20px;
+}
+
+.navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-center-part{
+  font-size: 20px;
+  color: #3e3e3e;
+}
+
+.nav-right-part{
+  position: relative;
+}
+
+.nav-right-part form input[type="text"]{
+  height: 40px;
+  width: 170px;
+  border-radius: 5px;
+  border: 1px solid #aeaeae;
+  padding-right: 40px;
+  padding-left: 20px;
+}
+
+.nav-right-part form button{
+  height: 44px;
+  background: #5815DF;
+  color: white;
+  border-radius: 5px;
+  margin-left: 10px;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.global-info-tab-elements span{
+  color: #5815DF;
+}
+
+.top-100-info-tab{
+  margin-top: 50px;
+}
+
+.global-info-tab{
+  margin-top: 40px;
+}
+
+.global-info-tab h1, .global-info-tab p{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.toggler{
+  display: inline-block;
+  padding: 7px;
+  width:40px;
+  height:40px;
+  box-shadow: 0px 0px 5px 2px #eee;
+  border-radius: 100px;
+  border: none;
+  font-size: 20px;
+  background: white;
+  margin-right: 20px;
+  cursor: pointer;
+  position: relative;
+  top:3px;
+}
+
+.total-cap-mob{
+  display: none;
+}
+
+.nav-right-part form{
+  display: inline-block;
+}
+
+.information-about-crypto-section, .about-crypto-section-child, .about-crypto-title, .about-crypto-data{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.change-chart-data-btn{
+  background: #5815DF;
+  border: none;
+  color: white;
+  padding: 10px;
+  height: 50px;
+  width: 100px;
+  border-right: 1px solid #210260;
+  cursor: pointer;
+}
+
+.change-chart-data-btn:active, .change-chart-data-btn:focus{
+  background: #210260;
+}
+
+.change-chart-data-btn:first-child{
+  border-radius: 5px 0 0 5px;
+}
+
+.change-chart-data-btn:last-child{
+  border-radius: 0 5px 5px 0;
+  border-right: none;
+}
+
+.range{
+  max-width: 400px;
+  min-width: 310px;
+  margin-top: 4px;
+}
+
+
+.range-bar{
+  width: 100%;
+  height: 25px;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+.range-bar {
+  width: 100%;
+  height: 15px;
+}
+
+.range-bar::-webkit-progress-bar {
+  background: #eee;
+  border-radius: 10px;
+}
+
+.range-bar::-webkit-progress-value {
+  background: rgb(255,208,49);
+  background: linear-gradient(90deg, rgba(255,208,49,1) 0%, rgba(105,208,67,1) 100%);
+  border-radius: 10px;
+}
+
+.range-bar::-moz-progress-bar {
+  background: rgb(255,208,49);
+  background: linear-gradient(90deg, rgba(255,208,49,1) 0%, rgba(105,208,67,1) 100%);
+  border-radius: 10px;
+}
+
+.range-bar::-ms-fill {
+  background: rgb(255,208,49);
+  background: linear-gradient(90deg, rgba(255,208,49,1) 0%, rgba(105,208,67,1) 100%);
+  border-radius: 10px;
+}
+
+.data-under-bar{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.top-info-header > *{
+  display: inline-block;
+}
+
+.coin-data-image{
+  width: 40px;
+}
+
+.coin-data-name{
+  margin-left: 15px;
+  position: relative;
+  top: -8px;
+}
+
+.coin-data-symbol{
+  margin-left: 15px;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 200;
+  top: -10px;
+}
+
+.coin-data-badge-rank{
+  margin-left: 15px;
+  position: relative;
+  top: -13px;
+  background: #5815DF;
+  padding: 10px 8px;
+  border-radius: 5px;
+  color: white
+}
+
+.top-info{
+
+  margin: 50px 0px 0px 0px;
+
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+}
+
+.market-data .price > b{
+  font-size: 40px;
+}
+
+.market-data .price > span{
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  top: -6px;
+  left: 15px;
+}
+
+.other-market-data > .first-tab-data > li, .other-market-data > .second-tab-data > li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px dashed #bcbcbc;
+  padding: 15px 2px;
+}
+
+.other-market-data > ul{
+  width: 400px;
+}
+
+.tab-data-data{
+  font-weight: 700;
+  color: #606060;
+}
+
+.other-market-data{
+  display: flex;
+  flex-direction: row;
+}
+
+.second-tab-data{
+  margin-left: 40px;
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+}
+
+aside{
+  min-width: 300px;
+  margin-left: 50px;
+  color: #3e3e3e;
+  font-size: 15px;
+}
+
+.left-data{
+  flex-shrink:0;
+}
+
+.chart{
+  padding-left: 10px;
+  padding-right: 10px;
+  width: auto !important;
+}
+
+.chart h1{
+  text-transform: capitalize;
+}
+
+.chart-top-data{
+  display: flex;
+  justify-content: space-between;
+}
+
+.change-chart-data{
+  position: relative;
+  top: 20px;
+}
+
+.search-tab{
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background: white;
+  box-shadow: 0px 0px 5px 2px #eee;
+  z-index: 999;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.data-table{
+  border-radius: 10px;
+}
+
+footer{
+  margin: 50px 0px;
+  padding: 20px;
+  box-shadow: 0px 0px 5px 2px #eee;
+  border-radius: 20px;
+}
+
+.footer-upper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 20px 0px; 
+}
+
+.disclaimer{
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #3e3e3e;
+  font-size: 12px;
+}
+
+main{
+  height: 100%;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  main{
+    flex-direction: column;
+  }
+  .other-market-data{
+    justify-content: space-around;
+  }
+  .recharts-wrapper{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  aside{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .top-info{
+    padding: 0px 10px;
+  }
+  .market-data > .price{
+    padding: 0px 10px;
+  }
+
+  .other-market-data{
+    padding: 0px 10px;
+  }
+}
+
+
+@media screen and (max-width: 1150px) {
+  .global-info-tab-element:first-child{
+    margin-left: 20px;
+  }
+  
+  .global-info-tab-element:last-child{
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 1075px) {
+  .nav-center-part{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 889px) {
+  .global-info-tab-element:first-child{
+    margin-left: 40px;
+  }
+  
+  .global-info-tab-element:last-child{
+    margin-right: 40px;
+  }
+
+  .global-info-tab-element{
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .total-cap-mob{
+    display: inline-block;
+  }
+  .total-cap{
+    display: none;
+  }
+  .top-info{
+    flex-direction: column;
+  }
+  .other-market-data{
+    flex-direction: column;
+  }
+  .second-tab-data{
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .first-tab-data{
+    margin-bottom: 0;
+  }
+  .other-market-data > ul {
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .chart-top-data{
+    flex-direction: column;
+  }
+  .chart h1 {
+    margin-bottom: 0px;
+  }
+  .change-chart-data{
+    height: 70px;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .navbar{
+    flex-direction: column;
+  }
+  .nav-right-part{
+    margin-top: 10px;
+  }
+  .footer-upper > div:first-child{
+    margin-right: 20px;
+  }
+  .footer-upper > div:last-child{
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .nav-right-part form input[type="text"]{
+    width:100px;
+  }
+  .nav-right-part form button {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .all-rights{
+    font-size: 14px;
+  }
+  .logo{
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .nav-right-part form input[type="text"]{
+    width:70px;
+  }
+  .toggler {
+    margin-right: 10px;
+  }
+
+  .logo{
+    width: 130px;
+  }
+
+  .global-info-tab-elements {
+    padding-left: 0px;
+  }
+}
+
