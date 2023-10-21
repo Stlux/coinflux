@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import logo from "./../assets/logo.png"
+import logoReversed from "./../assets/logo-reversed.png"
 import axios from "axios"
 import DataTable from 'react-data-table-component'
 
-export default function Header(){
-
-    const[theme, toggle] = useState(false);
+export default function Header(props:any){
 
     const[searchQuery, setSearchQuery] = useState("");
     const[searchQueryData, setSearchQueryData] = useState({
         coins: []
-    });
-
-    function toggleTheme():void{
-        toggle(!theme);
-    }
+    });    
 
     function search(e:any){
         e.preventDefault()
@@ -67,9 +62,9 @@ export default function Header(){
                 background: #0e0e0e !important;
                 color: white
             }
-            .navbar{
+            .navbar, footer, .global-info-tab-elements{
                 background: #1e1e1e !important;
-                box-shadow: none;
+                box-shadow: none !important;
             }
             .nav-center-part{
                 color: white;
@@ -80,22 +75,50 @@ export default function Header(){
             .global-info-tab-elements{
                 box-shadow: 0px 0px 5px 2px #1e1e1e;
             }
+            .tab-data-data{
+                color: white;
+            }
+            aside{
+                color: white;
+            }
+            .coin-image{
+                box-shadow: none;
+                background: #3e3e3e;
+            }
+            .chart-for-percentage{
+                box-shadow: none;
+            }
+            .custom-tooltip {
+                background-color: #1e1e1e;
+            }
+            
+            .custom-tooltip p {
+                color: white;
+            }
         `}
         </style>
     );
 
     return(
         <>
-            {theme ? newStyles : ""}
+            {props.themeState ? newStyles : ""}
             <nav className="container navbar">
                 <div className="nav-left-part">
-                    <img className="logo" src={logo}></img>
+                    <a href="/">
+                        {
+                        
+                            props.themeState ? 
+                                (<img className="logo" src={logoReversed}></img>)
+                            :
+                                (<img className="logo" src={logo}></img>)
+                        }
+                    </a>
                 </div>
                 <div className="nav-center-part">
                     Today's Cryptocurrency Prices by <u>Coin Flux</u>
                 </div>
                 <div className="nav-right-part">
-                    <button className="toggler" onClick={toggleTheme}>🌙</button>
+                    <button className="toggler" onClick={props.themeStateToggle}>🌙</button>
 
                     <form onSubmit={(e) => search(e)}>
                         <input type="text" id="search" className="search" placeholder="Search coins"/>

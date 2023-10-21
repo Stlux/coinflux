@@ -8,7 +8,20 @@ import axios from 'axios';
 
 function App() {
 
+  const [theme, toggle] = useState(() => {
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme ? JSON.parse(storedTheme) : false;
+  });
+  
   const [coins, updateCoins] = useState<[]>([]);
+
+  function toggleTheme():void{
+    toggle(!theme);
+  }
+
+  useEffect(() => {
+    localStorage.setItem('theme', JSON.stringify(theme));
+  }, [theme]);
   
   interface forGlobal{
     data: {
@@ -75,16 +88,16 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header themeState={theme} themeStateToggle={toggleTheme} />
 
       <BrowserRouter>
         <Routes>
-          <Route index element={<Main coinsData={coins} globalData={globalData}/>} />
-          <Route path="/coindata/:id" element={<CoinData/>} />
+          <Route index element={<Main coinsData={coins} globalData={globalData} themeState={theme}/>} />
+          <Route path="/coindata/:id" element={<CoinData themeState={theme}/>} />
         </Routes>
       </BrowserRouter>
 
-      <Footer />
+      <Footer themeState={theme}/>
     </>
   )
 }

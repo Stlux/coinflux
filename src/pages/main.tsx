@@ -1,4 +1,4 @@
-import DataTable from 'react-data-table-component';
+import DataTable, { createTheme } from 'react-data-table-component';
 import CurrencyFormat from 'react-currency-format';
 import floorToTwoDecimals from '../components/functions';
 
@@ -20,6 +20,7 @@ interface forPropsMain{ // <---
             }
         }
     },
+    themeState: string
 }
 
 interface columnsTypes{
@@ -46,6 +47,23 @@ interface TableColumn<T> {
 export default function Main(props:forPropsMain){
 
     let linkToCoin = "/coindata/";
+
+    createTheme('solarized', {
+        text: {
+            primary: '#eee',
+            secondary: '#fff',
+        },
+        background: {
+            default: '#1e1e1e',
+        },
+        context: {
+            background: '#1e1e1e',
+            text: '#FFF',
+        },
+        divider: {
+            default: '#3e3e3e',
+        }
+    }, 'dark');
 
     const columns_data:TableColumn<columnsTypes>[] = [
         // {
@@ -143,8 +161,12 @@ export default function Main(props:forPropsMain){
                 <div className="top-100-info-tab">
                     <h1>Top 100 coins</h1>
                     <div className='data-table'>
-                        <DataTable columns={columns_data} data={data}/>
-                        </div>
+                        <DataTable 
+                            columns={columns_data} 
+                            data={data} 
+                            theme={props.themeState ? "solarized" : ""}
+                        />
+                    </div>
                 </div>
 
                 <div className='information-about-crypto-section'>

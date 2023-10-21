@@ -1,12 +1,18 @@
 import logo from "./../assets/logo.png"
+import logoReversed from "./../assets/logo-reversed.png"
 
-export default function Footer(){
+export default function Footer(props:any){
     return(
         <>
             <footer className="container">
                 <section className="footer-upper">
                     <div className="logo-wrapper">
-                        <img className="logo" src={logo}></img>
+                    {
+                        props.themeState ? 
+                            (<img className="logo" src={logoReversed}></img>)
+                        :
+                            (<img className="logo" src={logo}></img>)
+                    }
                     </div>
                     <div className="all-rights">© 2023 CoinFlux. All Rights Reserved.</div>
                 </section>

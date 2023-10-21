@@ -407,6 +407,27 @@ main{
   height: 100%;
 }
 
+.chart-for-percentage{
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 2px #eee;
+}
+
+.custom-tooltip {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.custom-tooltip p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.responsive-chart{
+  height: 450px;
+}
 
 
 @media screen and (max-width: 1200px) {
@@ -434,6 +455,11 @@ main{
 
   .other-market-data{
     padding: 0px 10px;
+  }
+
+  .chart-for-percentage{
+    margin-bottom: 30px;
+    margin-top: 10px;
   }
 }
 
@@ -519,6 +545,9 @@ main{
   .footer-upper > div:last-child{
     margin-left: 20px;
   }
+  .responsive-chart{
+    height: 300px;
+  }
 }
 
 @media screen and (max-width: 440px) {
@@ -534,6 +563,14 @@ main{
   }
   .logo{
     width: 150px;
+  }
+  .change-chart-data-btn{
+    padding: 10px;
+    height: 40px;
+    width: 60px;
+  }
+  .responsive-chart{
+    height: 200px;
   }
 }
 
@@ -551,6 +588,16 @@ main{
 
   .global-info-tab-elements {
     padding-left: 0px;
+  }
+  .range{
+    min-width: 280px;
+  }
+  .coin-data-name{
+    font-size: 25px;
+    top: -9px;
+  }
+  .data-under-bar {
+    font-size: 13px;
   }
 }
 
