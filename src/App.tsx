@@ -79,7 +79,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route index path="/" element={<Main coinsData={coins} globalData={globalData}/>} />
+          <Route index element={<Main coinsData={coins} globalData={globalData}/>} />
           <Route path="/coindata/:id" element={<CoinData/>} />
         </Routes>
       </BrowserRouter>
