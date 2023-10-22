@@ -20,6 +20,7 @@ const CustomTooltip = ({ active, payload}:any) => {
     return null;
 };
 
+
 export default function CoinData(props:any){
 
     const {id} = useParams();

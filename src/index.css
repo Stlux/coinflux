@@ -548,6 +548,13 @@ main{
   .responsive-chart{
     height: 300px;
   }
+  .custom-tooltip {
+    padding: 10px;
+    width: 200px
+  }
+  .custom-tooltip p {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 440px) {
