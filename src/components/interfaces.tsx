@@ -13,7 +13,7 @@ interface forGlobal{
             eth: number
         }
     }
-  } // globalData interface
+  } // globalData interfaces
 
 interface forPropsMain{
     coinsData: [],
