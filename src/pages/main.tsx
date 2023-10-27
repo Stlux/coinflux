@@ -1,4 +1,4 @@
-import DataTable, { createTheme } from 'react-data-table-component';
+import DataTable from 'react-data-table-component';
 import CurrencyFormat from 'react-currency-format';
 import floorToTwoDecimals, {darkTheme} from '../components/functions';
 import CryptoInfo from '../components/crypto-info';
