@@ -12,8 +12,36 @@ function App() {
     const storedTheme = localStorage.getItem('theme');
     return storedTheme ? JSON.parse(storedTheme) : false;
   });
-  
+
   const [coins, updateCoins] = useState<[]>([]);
+
+  const [globalData, updateGlobal] = useState<forGlobal>({
+    data: {
+      total_market_cap: {
+        usd: 0
+      },
+      active_cryptocurrencies: 0,
+      markets: 0,
+      total_volume: {
+        usd: 0
+      },
+      market_cap_percentage: {
+        btc: 0,
+        eth: 0
+      }
+    }
+  });
+
+  const [exchanges, setExchanges] = useState<[{}]>([
+    {
+      id: "",
+      name: "",
+      url: "",
+      image: "",
+      trust_score: 10,
+      trust_score_rank: 1
+    }
+  ]);
 
   function toggleTheme():void{
     toggle(!theme);
@@ -39,23 +67,6 @@ function App() {
       }
     }
   }
-  
-  const [globalData, updateGlobal] = useState<forGlobal>({
-    data: {
-      total_market_cap: {
-        usd: 0
-      },
-      active_cryptocurrencies: 0,
-      markets: 0,
-      total_volume: {
-        usd: 0
-      },
-      market_cap_percentage: {
-        btc: 0,
-        eth: 0
-      }
-    }
-  });
 
   useEffect(() => {
 
@@ -78,10 +89,21 @@ function App() {
         console.error('Error fetching data:', error);
       }
     }
+
+    async function gettingExchangesData() {
+      try {
+        let response = await axios.get(`https://api.coingecko.com/api/v3/exchanges`);
+        setExchanges(response.data);
+        console.log("gettingExchangesData");
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
   
     if (coins.length === 0) {
       gettingDataTop100Coins();
       gettingMainCryptoData();
+      gettingExchangesData();
     }
       
   }, []);
@@ -92,7 +114,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route index element={<Main coinsData={coins} globalData={globalData} themeState={theme}/>} />
+          <Route index element={<Main coinsData={coins} globalData={globalData} themeState={theme} exchangesData={exchanges}/>} />
           <Route path="/coindata/:id" element={<CoinData themeState={theme}/>} />
         </Routes>
       </BrowserRouter>

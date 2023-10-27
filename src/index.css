@@ -134,6 +134,8 @@ a:hover {
 
 .top-100-info-tab{
   margin-top: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .global-info-tab{
@@ -163,6 +165,50 @@ a:hover {
 
 .total-cap-mob{
   display: none;
+}
+
+.top-exchanges{
+  margin-top: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.top-exchanges ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.top-exchanges li{
+  list-style-type: none;
+  width: 300px;
+  margin: 10px 10px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 2px #eee;
+}
+
+.top-exchanges li > a{
+  color: black;
+}
+.top-exchanges li > a > div{
+  display: inline-block;
+}
+
+.top-exchanges .other-data{
+  position: relative;
+  top: -18px;
+  margin-left: 10px;
+}
+
+.top-exchanges .score{
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.top-exchanges .score span{
+  color:#5815DF;
+  font-weight: 700;
 }
 
 .nav-right-part form{
@@ -478,6 +524,9 @@ main{
   .nav-center-part{
     display: none;
   }
+  .top-exchanges li{
+    width: 40%;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 889px) {
@@ -529,6 +578,9 @@ main{
   .change-chart-data{
     height: 70px;
     margin-bottom: 30px;
+  }
+  .top-exchanges li{
+    width: 100%;
   }
 }
 

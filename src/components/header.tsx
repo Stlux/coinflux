@@ -91,8 +91,14 @@ export default function Header(props:any){
             .custom-tooltip {
                 background-color: #1e1e1e;
             }
-            
             .custom-tooltip p {
+                color: white;
+            }
+            .top-exchanges li{
+                background: #1e1e1e;
+                box-shadow: none;
+            }
+            .top-exchanges li *{
                 color: white;
             }
         `}

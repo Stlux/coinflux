@@ -20,7 +20,8 @@ interface forPropsMain{ // <---
             }
         }
     },
-    themeState: string
+    themeState: string,
+    exchangesData: [{}]
 }
 
 interface columnsTypes{
@@ -35,6 +36,15 @@ interface columnsTypes{
     price_change_percentage_24h: number;
     total_volume: number;
     market_cap: number;
+}
+
+interface exchangeTypes{
+    id: string,
+    name: string,
+    url: string,
+    image: string,
+    trust_score: number,
+    trust_score_rank: number
 }
 
 interface TableColumn<T> {
@@ -126,6 +136,39 @@ export default function Main(props:forPropsMain){
 
     const data = props.coinsData;
 
+    const exData: exchangeTypes[] = props.exchangesData.map((item: any) => {
+        return {
+            id: item.id,
+            name: item.name,
+            url: item.url,
+            image: item.image,
+            trust_score: item.trust_score,
+            trust_score_rank: item.trust_score_rank
+        };
+    });
+
+    let exchanges = exData.slice(0, 9).map((val:exchangeTypes) => {
+        return(
+            <li>
+                <a href={val.url} target='_blank'>
+                    <div className="exchange-img">
+                            <img className='coin-image' src={val.image} alt={val.name} />
+                    </div>
+
+                    <div className="other-data">
+                        <div className="exchange-name">
+                            <b>{val.name}</b>
+                        </div>
+                        <div className='score'>
+                            Trust Score: <span>{val.trust_score}</span> / 
+                            Rank: <span>{val.trust_score_rank}</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        );
+    });
+
     return (
         <>
             <div className="container">
@@ -155,6 +198,13 @@ export default function Main(props:forPropsMain){
                         <li className='global-info-tab-element'>
                             Dominance: BTC <span>{floorToTwoDecimals(props.globalData.data.market_cap_percentage.btc)}%</span>, <span>ETH {floorToTwoDecimals(props.globalData.data.market_cap_percentage.eth)}%</span>
                         </li>
+                    </ul>
+                </div>
+
+                <div className='top-exchanges'>
+                    <h1>Top Exchanges</h1>
+                    <ul>
+                        {exchanges}
                     </ul>
                 </div>
 
