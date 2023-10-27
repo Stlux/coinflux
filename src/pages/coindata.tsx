@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import { ResponsiveContainer, AreaChart, Area, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import axios from 'axios';
 import CurrencyFormat from 'react-currency-format';
-import floorToTwoDecimals from '../components/functions';
-import DataTable, {createTheme} from 'react-data-table-component'
+import floorToTwoDecimals, {darkTheme} from '../components/functions';
+import DataTable from 'react-data-table-component'
+import {TableColumn, columnsTypesCoin} from '../components/interfaces';
 
 const CustomTooltip = ({ active, payload}:any) => {
     if (active && payload && payload.length) {
@@ -17,12 +18,16 @@ const CustomTooltip = ({ active, payload}:any) => {
         );
     }
     return null;
-};
-
+}; // custom tooltip for chart
 
 export default function CoinData(props:any){
 
-    const {id} = useParams();
+    darkTheme();
+
+    const {id} = useParams(); // geting id of coin
+    
+    const [chart, setChart] = useState({prices : []}); // default chart
+    const [chartTimeStamp, setChartTimeStamp] = useState(0); // updated chart (with selected timestap)
     const [coinData, updateCoinData] = useState({
         id: "",
         symbol: "",
@@ -63,37 +68,34 @@ export default function CoinData(props:any){
             total_supply: "",
             max_supply: 0,
         }
-    });
-    const [chart, setChart] = useState({prices : []});
-    const [chartTimeStrap, setChartTimeStrap] = useState(0);
+    }); //information about coin
 
     useEffect(() => {
-
         
         async function gettingChart(){
-            let response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${chartTimeStrap}`);
+            let response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${chartTimeStamp}`);
             setChart(response.data);
-        }
+        } // fetching chart data of a coin
 
-        if(chartTimeStrap > 0){
+        if(chartTimeStamp > 0){
             gettingChart();
         }
 
-    }, [chartTimeStrap]);
+    }, [chartTimeStamp]); // run this only when chartTimeStamp is clicked, not at first render
 
     useEffect(() => {
 
         async function gettingFromApi(){
             let response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}`);
             updateCoinData(response.data);
-        }
+        } // getting data of a selected coin
 
         gettingFromApi();
 
         async function gettingChart(){
             let response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=30`);
             setChart(response.data);
-        }
+        } // getting basic chart
 
         gettingChart();
         
@@ -103,55 +105,21 @@ export default function CoinData(props:any){
 
     chart.prices.map((val) => {
         let dataFormatted =  new Date(val[0]);
-        data.push({ time: dataFormatted, price: val[1]});
+        data.push({ time: dataFormatted, price: val[1]}); // pushing formated data in new array of objects 
     });
 
     function getNeededTimeStap(val:number){
-        setChartTimeStrap(val)
-    }
+        setChartTimeStamp(val)
+    } // onclick function to set state of updated chart
 
     let progressDifference:number = +coinData.market_data.high_24h.usd - +coinData.market_data.low_24h.usd;
     let progressValue:number = +coinData.market_data.current_price.usd - +coinData.market_data.low_24h.usd;
+    // calculating difference and value for price bar
 
-    interface columnsTypes{
-        high_24h: {
-            usd: any;
-        };
-        low_24h: {
-            usd: any;
-        };
-        current_price: {
-            usd: any;
-        };
-        market_cap: {
-            usd: any;
-        };
-        total_volume: {
-            usd: any;
-        };
-        fully_diluted_valuation: {
-            usd: any;
-        };
-        price_change_percentage_24h: any;
-        price_change_percentage_7d: any;
-        price_change_percentage_60d: any;
-        price_change_percentage_14d: any;
-        price_change_percentage_30d: any;
-        price_change_percentage_1y: any;
-        circulating_supply: any;
-        total_supply: any;
-        max_supply: any;
-    }
-
-    interface TableColumn<T> {
-        name: string;
-        selector: (row: T) => string | number;
-    }
-
-    let columns:TableColumn<columnsTypes>[] = [
+    let columns:TableColumn<columnsTypesCoin>[] = [  // data foir table (price percentage change in different timestamp)
         {
             name: '24h',
-            selector: (row:columnsTypes) => {
+            selector: (row:columnsTypesCoin) => {
                 return row.price_change_percentage_24h >= 0 ?
                     (
                         <span style={{color: "green"}}>{floorToTwoDecimals(row.price_change_percentage_24h)}%</span> 
@@ -164,7 +132,7 @@ export default function CoinData(props:any){
         },
         {
             name: '7d',
-            selector: (row:columnsTypes) => {
+            selector: (row:columnsTypesCoin) => {
                 return row.price_change_percentage_7d >= 0 ?
                     (
                         <span style={{color: "green"}}>{floorToTwoDecimals(row.price_change_percentage_7d)}%</span> 
@@ -177,7 +145,7 @@ export default function CoinData(props:any){
         },
         {
             name: '14d',
-            selector: (row:columnsTypes) => {
+            selector: (row:columnsTypesCoin) => {
                 return row.price_change_percentage_14d >= 0 ?
                     (
                         <span style={{color: "green"}}>{floorToTwoDecimals(row.price_change_percentage_14d)}%</span> 
@@ -190,7 +158,7 @@ export default function CoinData(props:any){
         },
         {
             name: '30d',
-            selector: (row:columnsTypes) => {
+            selector: (row:columnsTypesCoin) => {
                 return row.price_change_percentage_30d >= 0 ?
                     (
                         <span style={{color: "green"}}>{floorToTwoDecimals(row.price_change_percentage_30d)}%</span> 
@@ -203,7 +171,7 @@ export default function CoinData(props:any){
         },
         {
             name: '60d',
-            selector: (row:columnsTypes) => {
+            selector: (row:columnsTypesCoin) => {
                 return row.price_change_percentage_60d >= 0 ?
                     (
                         <span style={{color: "green"}}>{floorToTwoDecimals(row.price_change_percentage_60d)}%</span> 
@@ -216,7 +184,7 @@ export default function CoinData(props:any){
         },
         {
             name: '1y',
-            selector: (row:columnsTypes) => {
+            selector: (row:columnsTypesCoin) => {
                 return row.price_change_percentage_1y >= 0 ?
                     (
                         <span style={{color: "green"}}>{floorToTwoDecimals(row.price_change_percentage_1y)}%</span> 
@@ -229,24 +197,7 @@ export default function CoinData(props:any){
         }
     ]
 
-    createTheme('solarized', {
-        text: {
-            primary: '#eee',
-            secondary: '#fff',
-        },
-        background: {
-            default: '#1e1e1e',
-        },
-        context: {
-            background: '#1e1e1e',
-            text: '#FFF',
-        },
-        divider: {
-            default: '#3e3e3e',
-        }
-    }, 'dark');
-
-    const dataArray: columnsTypes[] = [coinData.market_data];
+    const dataArray: columnsTypesCoin[] = [coinData.market_data];
 
     return (
         <>
@@ -335,6 +286,9 @@ export default function CoinData(props:any){
                             </div>
                             
                             <div className="responsive-chart">
+                            
+                            {/* Chart */}
+
                             <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart data={data} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
                                     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
@@ -350,13 +304,15 @@ export default function CoinData(props:any){
                                 </AreaChart>
                             </ResponsiveContainer>
                             </div>
-                                    
+                            
+                            {/* Data table */}
                             <div className="chart-for-percentage">
                                     <DataTable columns={columns} data={dataArray} theme={props.themeState ? "solarized" : ""}/>
                             </div>
                         </div>
                     </div>
                     
+                    {/* Text about coin in a form of HTML */}
                     <aside dangerouslySetInnerHTML={{ __html: coinData.description.en }}></aside>
 
                 </main>

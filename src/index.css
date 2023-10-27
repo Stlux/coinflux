@@ -23,6 +23,40 @@ a:hover {
   color: #5815DF;
 }
 
+.wrapper-loader{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: white;
+
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.loader-img{
+  position: absolute;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
+}
+
+.request-error{
+  height: auto;
+  position: relative;
+}
+
+.request-error > div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.request-error h4{
+  font-weight: 400;
+}
+
 .container{
   max-width: 1200px;
   margin-left: auto; 
@@ -215,9 +249,18 @@ a:hover {
   display: inline-block;
 }
 
+.information-about-crypto-section{
+  margin-left:10px;
+  margin-right:10px;
+}
+
 .information-about-crypto-section, .about-crypto-section-child, .about-crypto-title, .about-crypto-data{
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.about-crypto-section-child ul{
+  margin-left: 40px;
 }
 
 .change-chart-data-btn{

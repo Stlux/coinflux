@@ -3,6 +3,7 @@ import logo from "./../assets/logo.png"
 import logoReversed from "./../assets/logo-reversed.png"
 import axios from "axios"
 import DataTable from 'react-data-table-component'
+import {columnsTypes, TableColumn} from '../components/interfaces';
 
 export default function Header(props:any){
 
@@ -28,20 +29,6 @@ export default function Header(props:any){
 
     console.log(searchQueryData.coins);
 
-    interface columnsTypes{
-        id: number;
-        thumb: string;
-        name: string;
-        market_cap_rank: number;
-    }
-
-    interface TableColumn<T> {
-        name: string;
-        selector: (row: T) => string | number; // Adjust this based on the type of data in your columns
-        sortable?: boolean;
-        width?: string;
-    }
-
     let urlToCoin = "/coindata/";
     const columns:TableColumn<columnsTypes>[] = [
         {
@@ -55,7 +42,7 @@ export default function Header(props:any){
         },
     ];
 
-    let newStyles = (
+    let newStyles = ( //putting those styles if the theme is toggled to 'dark'
         <style>
         {`
             body {
@@ -101,19 +88,24 @@ export default function Header(props:any){
             .top-exchanges li *{
                 color: white;
             }
+            .search-tab{
+                box-shadow: none;
+            }
         `}
         </style>
     );
 
     return(
         <>
-            {props.themeState ? newStyles : ""}
+            {
+                props.themeState ? newStyles : "" // if theme is dark, set styles
+            }
             <nav className="container navbar">
                 <div className="nav-left-part">
                     <a href="/">
                         {
                         
-                            props.themeState ? 
+                            props.themeState ? // show another logo, if theme is dark
                                 (<img className="logo" src={logoReversed}></img>)
                             :
                                 (<img className="logo" src={logo}></img>)
@@ -132,7 +124,7 @@ export default function Header(props:any){
                     </form>
                         {
 
-                            searchQuery.length > 0 ? 
+                            searchQuery.length > 0 ? // show element if search query is more than 0
                             (<div className="search-tab"><DataTable columns={columns} data={searchQueryData.coins.slice(0, 10)}/></div>)
                             :
                             (<></>)

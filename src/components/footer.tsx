@@ -1,7 +1,7 @@
 import logo from "./../assets/logo.png"
 import logoReversed from "./../assets/logo-reversed.png"
 
-export default function Footer(props:any){
+export default function Footer(props:any){  //just footer component
     return(
         <>
             <footer className="container">

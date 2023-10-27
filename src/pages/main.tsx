@@ -1,87 +1,16 @@
 import DataTable, { createTheme } from 'react-data-table-component';
 import CurrencyFormat from 'react-currency-format';
-import floorToTwoDecimals from '../components/functions';
-
-interface forPropsMain{ // <---
-    coinsData: [],
-    globalData: {
-        data: {
-            total_market_cap: {
-                usd: number;
-            },
-            active_cryptocurrencies: number,
-            markets: number,
-            total_volume: {
-                usd:number
-            },
-            market_cap_percentage: {
-                btc:number,
-                eth: number
-            }
-        }
-    },
-    themeState: string,
-    exchangesData: [{}]
-}
-
-interface columnsTypes{
-    id: number;
-    thumb: string;
-    name: string;
-    market_cap_rank: number;
-    image: string;
-    symbol: string;
-    current_price: number;
-    price_change_24h: number;
-    price_change_percentage_24h: number;
-    total_volume: number;
-    market_cap: number;
-}
-
-interface exchangeTypes{
-    id: string,
-    name: string,
-    url: string,
-    image: string,
-    trust_score: number,
-    trust_score_rank: number
-}
-
-interface TableColumn<T> {
-    name: string;
-    selector: (row: T) => string | number; // Adjust this based on the type of data in your columns
-    sortable?: boolean;
-    width?: string;
-}
+import floorToTwoDecimals, {darkTheme} from '../components/functions';
+import CryptoInfo from '../components/crypto-info';
+import {forPropsMain, columnsTypes, exchangeTypes, TableColumn} from '../components/interfaces';
 
 export default function Main(props:forPropsMain){
 
-    let linkToCoin = "/coindata/";
+    let linkToCoin = "/coindata/"; //link base
 
-    createTheme('solarized', {
-        text: {
-            primary: '#eee',
-            secondary: '#fff',
-        },
-        background: {
-            default: '#1e1e1e',
-        },
-        context: {
-            background: '#1e1e1e',
-            text: '#FFF',
-        },
-        divider: {
-            default: '#3e3e3e',
-        }
-    }, 'dark');
+    darkTheme();
 
-    const columns_data:TableColumn<columnsTypes>[] = [
-        // {
-        //     name: '#',
-        //     selector: (row:columnsTypes) => props.coinsData.indexOf(row)+1, // <---
-        //     sortable: true,
-        //     width: '70px'
-        // },
+    const columns_data:TableColumn<columnsTypes>[] = [ //table wioth crypto data, property selector is converted to a string, becasuse it is A JSX element
         {
             name: 'Image',
             selector: (row:columnsTypes) => <a href={linkToCoin + row.id}><img src={row.image} alt={`${row.id}`} className='coin-image'></img></a> as unknown as string,
@@ -93,7 +22,7 @@ export default function Main(props:forPropsMain){
         },
         {
             name: 'Ticker',
-            selector: (row:columnsTypes) => row.symbol,
+            selector: (row:columnsTypes) => row.symbol as string, 
             sortable: true,
             width: '100px'
         },
@@ -111,11 +40,11 @@ export default function Main(props:forPropsMain){
             name: '24h (%)',
             selector: (row:columnsTypes) => {
 
-                return row.price_change_percentage_24h >= 0 ?
+                return row.price_change_percentage_24h >= 0 ? // if price is positive -> green
                     (
                         <span style={{color: "green"}}>{row.price_change_percentage_24h}%</span> 
                     ) as unknown as string
-                :  
+                :  // else -> red
                     (
                         <span style={{color: "red"}}>{row.price_change_percentage_24h}%</span>
                     ) as unknown as string
@@ -145,9 +74,9 @@ export default function Main(props:forPropsMain){
             trust_score: item.trust_score,
             trust_score_rank: item.trust_score_rank
         };
-    });
+    }); //converting data type
 
-    let exchanges = exData.slice(0, 9).map((val:exchangeTypes) => {
+    let exchanges = exData.slice(0, 9).map((val:exchangeTypes) => { // take only first 9 elements and map them to a JSX elements
         return(
             <li>
                 <a href={val.url} target='_blank'>
@@ -172,7 +101,6 @@ export default function Main(props:forPropsMain){
     return (
         <>
             <div className="container">
-
                 <div className="global-info-tab">
 
                     <h1>Global crypto Info</h1>
@@ -219,49 +147,7 @@ export default function Main(props:forPropsMain){
                     </div>
                 </div>
 
-                <div className='information-about-crypto-section'>
-
-                    <div className="about-crypto-section-child">
-                        <h1 className="about-crypto-title">What is Crypto Market Cap?</h1>
-                        <p className="about-crypto-data">Crypto market cap is the total value of all the coins of a particular cryptocurrency that have been mined or are in circulation. Market capitalization is used to determine the ranking of cryptocurrencies. The higher the market cap of a particular crypto coin, the higher its ranking and share of the market. Crypto market cap is calculated by multiplying the total number of coins in circulation by its current price. For instance, to calculate the market cap of Ethereum, all you need to do is multiply the total number of Ethereum in circulation by the current price of one Ethereum and you will get its market cap.</p>
-                    </div>
-
-                    <div className="about-crypto-section-child">
-                        <h1 className="about-crypto-title">How to compare Cryptocurrencies Market Cap?</h1>
-                        <p className="about-crypto-data">
-                            Crypto market cap can be divided into three categories:
-                        </p>
-                        <ul>
-                            <li>Large-cap cryptocurrencies (&gt;$10 billion)</li>
-                            <li>Mid-cap Cryptocurrencies ($1 billion - $10 billion)</li>
-                            <li>Small-cap cryptocurrencies (&lt;$1 billion)</li>
-                        </ul>
-                        <p>
-                            As a financial metric, market cap allows you to compare the total circulating value of one cryptocurrency with another. Large cap cryptocurrencies such as Bitcoin and Ethereum have a market cap of over $10 billion. They typically consist of protocols that have demonstrated track records, and have a vibrant ecosystem of developers maintaining and enhancing the protocol, as well as building new projects on top of them. While market cap is a simple and intuitive comparison metric, it is not a perfect point of comparison. Some cryptocurrency projects may appear to have inflated market cap through price swings and the tokenomics of their supply. As such, it is best to use this metric as a reference alongside other metrics such as trading volume, liquidity, fully diluted valuation, and fundamentals during your research process.
-                        </p>
-                    </div>
-
-                    <div className="about-crypto-section-child">
-                        <h1 className="about-crypto-title">How does CoinFlux Calculate Cryptocurrency Prices?</h1>
-                        <p className="about-crypto-data">The price is calculated using a global volume-weighted average price formula which is based on the pairings available on different exchanges of a particular crypto asset. For examples and more detailed information on how we track cryptocurrency prices and other metrics</p>
-                    </div>
-
-                    <div className="about-crypto-section-child">
-                        <h1 className="about-crypto-title">What is Crypto Market Cap?</h1>
-                        <p className="about-crypto-data">Crypto market cap is the total value of all the coins of a particular cryptocurrency that have been mined or are in circulation. Market capitalization is used to determine the ranking of cryptocurrencies. The higher the market cap of a particular crypto coin, the higher its ranking and share of the market. Crypto market cap is calculated by multiplying the total number of coins in circulation by its current price. For instance, to calculate the market cap of Ethereum, all you need to do is multiply the total number of Ethereum in circulation by the current price of one Ethereum and you will get its market cap.</p>
-                    </div>
-
-                    <div className="about-crypto-section-child">
-                        <h1 className="about-crypto-title">Why are Cryptocurrency Prices Different on Exchanges?</h1>
-                        <p className="about-crypto-data">You may notice that cryptocurrencies listed on different exchanges have different prices. The reasons for this are complex, but simply put cryptocurrencies are traded on different exchanges and across different markets with varying economic conditions, liquidity, trading pairs, and offerings (e.g. derivatives / leverage) which all influence price in their own way.</p>
-                    </div>
-
-                    <div className="about-crypto-section-child">
-                        <h1 className="about-crypto-title">What is 24h Volume in the Table Above?</h1>
-                        <p className="about-crypto-data">The 24h trading volume refers to the amount a cryptocurrency has been bought and sold on all exchanges within the last 24 hours on the spot market. For instance, if the 24h volume for Ethereum is $15 billion, it means that $15 billion worth of Ether had changed hands across all exchanges in the last 24 hours.</p>
-                    </div>
-
-                </div>
+                <CryptoInfo/>
 
             </div>
         </>
