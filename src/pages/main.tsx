@@ -29,12 +29,10 @@ export default function Main(props:forPropsMain){
         {
             name: 'Price (USD)',
             selector: (row:columnsTypes) => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.current_price} prefix={'$'} /> as unknown as string,
-            sortable: true
         },
         {
             name: '24h',
             selector: (row:columnsTypes) => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.price_change_24h} prefix={'$'} /> as unknown as string,
-            sortable: true
         },
         {
             name: '24h (%)',
@@ -49,17 +47,14 @@ export default function Main(props:forPropsMain){
                         <span style={{color: "red"}}>{row.price_change_percentage_24h}%</span>
                     ) as unknown as string
             },
-            sortable: true
         },
         {
             name: '24h Volume',
             selector: (row:columnsTypes) => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.total_volume} prefix={'$'} /> as unknown as string,
-            sortable: true
         },
         {
             name: 'Mkt Cap',
             selector: (row:columnsTypes) => <CurrencyFormat thousandSeparator={true} displayType={'text'} value={row.market_cap} prefix={'$'} /> as unknown as string,
-            sortable: true
         }
     ];
 
