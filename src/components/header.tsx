@@ -24,10 +24,7 @@ export default function Header(props:any){
         }
 
         gettingFromApi();
-        console.log(searchQuery);
     }, [searchQuery])
-
-    console.log(searchQueryData.coins);
 
     let urlToCoin = "/coindata/";
     const columns:TableColumn<columnsTypes>[] = [

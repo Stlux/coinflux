@@ -44,7 +44,8 @@ function App() {
       url: "",
       image: "",
       trust_score: 10,
-      trust_score_rank: 1
+      trust_score_rank: 1,
+      trade_volume_24h_btc: 0
     }
   ]); // list of exchanges (objects)
 

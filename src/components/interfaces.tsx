@@ -58,6 +58,7 @@ interface exchangeTypes{
     image: string,
     trust_score: number,
     trust_score_rank: number
+    trade_volume_24h_btc: number
 } // types for exchange object
 
 interface TableColumn<T> {

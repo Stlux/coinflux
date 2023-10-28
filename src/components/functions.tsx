@@ -4,6 +4,11 @@ export default function floorToTwoDecimals(num:number):number{
     return Math.floor(num*100)/100;
 }
 
+function reduceTextToOneWord(str: string): string {
+    const words: string[] = str.split(" ");
+    return words[0];
+}
+
 function darkTheme():void{
     createTheme('solarized', {
         text: {
@@ -24,5 +29,6 @@ function darkTheme():void{
 }
 
 export{
-    darkTheme
+    darkTheme,
+    reduceTextToOneWord
 }

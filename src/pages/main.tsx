@@ -1,6 +1,6 @@
 import DataTable from 'react-data-table-component';
 import CurrencyFormat from 'react-currency-format';
-import floorToTwoDecimals, {darkTheme} from '../components/functions';
+import floorToTwoDecimals, {darkTheme, reduceTextToOneWord} from '../components/functions';
 import CryptoInfo from '../components/crypto-info';
 import {forPropsMain, columnsTypes, exchangeTypes, TableColumn} from '../components/interfaces';
 
@@ -67,13 +67,14 @@ export default function Main(props:forPropsMain){
             url: item.url,
             image: item.image,
             trust_score: item.trust_score,
-            trust_score_rank: item.trust_score_rank
+            trust_score_rank: item.trust_score_rank,
+            trade_volume_24h_btc: item.trade_volume_24h_btc
         };
     }); //converting data type
 
     let exchanges = exData.slice(0, 9).map((val:exchangeTypes) => { // take only first 9 elements and map them to a JSX elements
         return(
-            <li>
+            <li key={val.id}>
                 <a href={val.url} target='_blank'>
                     <div className="exchange-img">
                             <img className='coin-image' src={val.image} alt={val.name} />
@@ -81,7 +82,10 @@ export default function Main(props:forPropsMain){
 
                     <div className="other-data">
                         <div className="exchange-name">
-                            <b>{val.name}</b>
+                            <b>{reduceTextToOneWord(val.name)}</b>
+                        </div>
+                        <div className="volume">
+                            Vol: <CurrencyFormat thousandSeparator={true} displayType={'text'} value={floorToTwoDecimals(val.trade_volume_24h_btc)} suffix={' BTC'} />
                         </div>
                         <div className='score'>
                             Trust Score: <span>{val.trust_score}</span> / 
@@ -119,7 +123,7 @@ export default function Main(props:forPropsMain){
                             24 Volume: <span><CurrencyFormat thousandSeparator={true} displayType={'text'} value={floorToTwoDecimals(props.globalData.data.total_volume.usd)} prefix={'$'} /></span>
                         </li>
                         <li className='global-info-tab-element'>
-                            Dominance: BTC <span>{floorToTwoDecimals(props.globalData.data.market_cap_percentage.btc)}%</span>, <span>ETH {floorToTwoDecimals(props.globalData.data.market_cap_percentage.eth)}%</span>
+                            Dominance: BTC <span>{floorToTwoDecimals(props.globalData.data.market_cap_percentage.btc)}%</span>, ETH <span>{floorToTwoDecimals(props.globalData.data.market_cap_percentage.eth)}%</span>
                         </li>
                     </ul>
                 </div>
