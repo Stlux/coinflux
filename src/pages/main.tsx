@@ -13,7 +13,7 @@ export default function Main(props:forPropsMain){
     const columns_data:TableColumn<columnsTypes>[] = [ //table wioth crypto data, property selector is converted to a string, becasuse it is A JSX element
         {
             name: 'Image',
-            selector: (row:columnsTypes) => <a href={linkToCoin + row.id}><img src={row.image} alt={`${row.id}`} className='coin-image'></img></a> as unknown as string,
+            selector: (row:columnsTypes) => <div className='coin-image-a-wrapper'><a href={linkToCoin + row.id}><img src={row.image} alt={`${row.id}`} className='coin-image'></img></a></div> as unknown as string,
             width: '100px'
         },
         {
@@ -102,7 +102,7 @@ export default function Main(props:forPropsMain){
             <div className="container">
                 <div className="global-info-tab">
 
-                    <h1>Global crypto Info</h1>
+                    <h1>Global crypto Info 🪙</h1>
 
                     <p>The global cryptocurrency market cap today is <b>${Math.floor(Math.floor(props.globalData.data.total_market_cap.usd)/1000000000000 * 100) / 100} Trillion</b></p>
 
@@ -129,7 +129,7 @@ export default function Main(props:forPropsMain){
                 </div>
 
                 <div className='top-exchanges'>
-                    <h1>Top Exchanges</h1>
+                    <h1>Top Exchanges 🏦</h1>
                     <ul>
                         {exchanges}
                     </ul>

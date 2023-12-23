@@ -485,6 +485,11 @@ aside{
   border-radius: 10px;
 }
 
+.coin-image-a-wrapper{
+  height: 68px;
+  overflow: hidden;
+}
+
 footer{
   margin: 50px 0px;
   padding: 20px;
@@ -695,6 +700,17 @@ main{
   .responsive-chart{
     height: 200px;
   }
+
+  .loader-img{
+    position: absolute;
+
+    width: 50px;
+    height: 50px;
+
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+  }
+
 }
 
 @media screen and (max-width: 360px) {
