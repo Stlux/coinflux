@@ -233,6 +233,7 @@ a:hover {
   position: relative;
   top: -18px;
   margin-left: 10px;
+  align-self: end;
 }
 
 .top-exchanges .score{
@@ -516,6 +517,17 @@ main{
 
 .responsive-chart{
   height: 450px;
+}
+
+.exchange-img{
+  width: 80px;
+}
+
+.flex-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
 }
 
 

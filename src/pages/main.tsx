@@ -73,22 +73,24 @@ export default function Main(props:forPropsMain){
 
     let exchanges = exData.slice(0, 9).map((val:exchangeTypes) => { // take only first 9 elements and map them to a JSX elements
         return(
-            <li>
-                <a href={val.url} target='_blank'>
-                    <div className="exchange-img">
-                            <img className='coin-image' src={val.image} alt={val.name} />
-                    </div>
+            <li className='flex-container'>
+                <div className="exchange-img">
+                    <a href={val.url} target='_blank'>
+                        <img className='coin-image' src={val.image} alt="logo" />
+                    </a>
+                </div>
 
-                    <div className="other-data">
-                        <div className="exchange-name">
+                <div className="other-data">
+                    <div className="exchange-name">
+                        <a href={val.url} target='_blank'>
                             <b>{val.name}</b>
-                        </div>
-                        <div className='score'>
-                            Trust Score: <span>{val.trust_score}</span> / 
-                            Rank: <span>{val.trust_score_rank}</span>
-                        </div>
+                        </a>
                     </div>
-                </a>
+                    <div className='score'>
+                        Trust Score: <span>{val.trust_score}</span> / 
+                        Rank: <span>{val.trust_score_rank}</span>
+                    </div>
+                </div>
             </li>
         );
     });

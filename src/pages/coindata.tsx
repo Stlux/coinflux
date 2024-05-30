@@ -75,6 +75,7 @@ export default function CoinData(props:any){
         async function gettingChart(){
             let response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${chartTimeStamp}`);
             setChart(response.data);
+            console.log("requested")
         } // fetching chart data of a coin
 
         if(chartTimeStamp > 0){
@@ -88,6 +89,7 @@ export default function CoinData(props:any){
         async function gettingFromApi(){
             let response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}`);
             updateCoinData(response.data);
+            console.log("requested")
         } // getting data of a selected coin
 
         gettingFromApi();
@@ -95,6 +97,7 @@ export default function CoinData(props:any){
         async function gettingChart(){
             let response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=30`);
             setChart(response.data);
+            console.log("requested")
         } // getting basic chart
 
         gettingChart();

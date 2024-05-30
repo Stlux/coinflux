@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import loader from './assets/Rocket.gif';
 
+
 function App() {
 
   const [coins, updateCoins] = useState<[]>([]); // list of coins data
@@ -19,6 +20,8 @@ function App() {
     const storedTheme = localStorage.getItem('theme');
     return storedTheme ? JSON.parse(storedTheme) : false;
   }); // theme toggler state (used for all pages by local storage)
+
+  const currentPathname = window.location.pathname;
 
   const [globalData, updateGlobal] = useState<forGlobal>({
     data: {
@@ -62,6 +65,7 @@ function App() {
       try {
         let response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&localization=false`);
         updateCoins(response.data);
+        console.log("requested")
       } catch (error) {
         showErrOnPage(); // toggle error state and displaying an error
       }
@@ -71,6 +75,7 @@ function App() {
       try {
         let response = await axios.get(`https://api.coingecko.com/api/v3/global`);
         updateGlobal(response.data);
+        console.log("requested");
       } catch (error) {}
     } // fetching data with axios of main crypto data
 
@@ -78,6 +83,7 @@ function App() {
       try {
         let response = await axios.get(`https://api.coingecko.com/api/v3/exchanges`);
         setExchanges(response.data);
+        console.log("requested");
       } catch (error) {}
     } // fetching data with axios of crypto exchanges
 
@@ -85,7 +91,7 @@ function App() {
       setErrorRequestAPI(!request); 
     }; // setting error state function
   
-    if (coins.length === 0) {
+    if (coins.length === 0 && currentPathname === "/") {
       gettingDataTop100Coins();
       gettingMainCryptoData();
       gettingExchangesData();

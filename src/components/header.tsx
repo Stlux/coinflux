@@ -13,7 +13,7 @@ export default function Header(props:any){
     });    
 
     function search(e:any){
-        e.preventDefault()
+        e.preventDefault();
         setSearchQuery(e.target.search.value)
     }
 
@@ -23,11 +23,10 @@ export default function Header(props:any){
             setSearchQueryData(response.data);
         }
 
-        gettingFromApi();
-        console.log(searchQuery);
-    }, [searchQuery])
+        console.log("requested")
 
-    console.log(searchQueryData.coins);
+        gettingFromApi();
+    }, [searchQuery])
 
     let urlToCoin = "/coindata/";
     const columns:TableColumn<columnsTypes>[] = [
